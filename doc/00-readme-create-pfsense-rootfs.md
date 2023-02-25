@@ -9,16 +9,17 @@
 
 - Create the filesystem disk image:
 ```bash
-qemu-img create -f qcow2 vnx_rootfs_kvm_pfsense.qcow2 10G
+qemu-img create -f qcow2 vnx_rootfs_kvm_pfsense-2.6.0.qcow2 10G
 ```
 - Dowload pfsense ISO installer from https://pfsense.org/download and uncompress it:
 ```bash
 gunzip pfSense-CE-2.6.0-RELEASE-amd64.iso.gz
 ```
-
-virt-install --virt-type kvm --name pfsense --ram 2048 --vcpus 2 --cdrom=/almacen/iso/pfSense-CE-2.6.0-RELEASE-amd64.iso --disk vnx_rootfs_kvm_pfsense.qcow2,bus=virtio,size=10,format=qcow2 --network default --network bridge=virbr0 --graphics vnc,listen=0.0.0.0 --noautoconsole --os-type=linux --os-variant=freebsd10.0
-
+- Install pfSense in the image:
+```bash
+virt-install --virt-type kvm --name pfsense --ram 2048 --vcpus 2 --cdrom=/pfSense-CE-2.6.0-RELEASE-amd64.iso --disk vnx_rootfs_kvm_pfsense-2.6.0.qcow2,bus=virtio,size=10,format=qcow2 --network default --network bridge=virbr0 --graphics vnc,listen=0.0.0.0 --noautoconsole --os-type=linux --os-variant=freebsd12.3 &
 virt-viewer pfsense
+```
 
 vnx --modify-rootfs vnx_rootfs_kvm_pfsense.qcow2 --mem 4G --arch x86_64 --vcpu 4 --update-aced 
 - Enable access to external repositories:
