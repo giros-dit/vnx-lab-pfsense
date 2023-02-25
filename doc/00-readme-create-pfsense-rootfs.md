@@ -20,27 +20,22 @@ gunzip pfSense-CE-2.6.0-RELEASE-amd64.iso.gz
 virt-install --virt-type kvm --name pfsense --ram 2048 --vcpus 2 --cdrom=/pfSense-CE-2.6.0-RELEASE-amd64.iso --disk vnx_rootfs_kvm_pfsense-2.6.0.qcow2,bus=virtio,size=10,format=qcow2 --network default --network bridge=virbr0 --graphics vnc,listen=0.0.0.0 --noautoconsole --os-type=linux --os-variant=freebsd12.3 &
 virt-viewer pfsense
 ```
-
+- Stop the virtual machine and restart it with:
+```bash
 vnx --modify-rootfs vnx_rootfs_kvm_pfsense.qcow2 --mem 4G --arch x86_64 --vcpu 4 --update-aced 
+```
+- Exit configuration assistant with ctrl^c and exit to shell.
 - Enable access to external repositories:
   1. Make sure "enabled" key is set to "yes" in /etc/pkg/FreeBSD.conf
   2. Change "enabled: no" to "enabled: yes" in /usr/local/etc/pkg/repos/FreeBSD.conf
   3. Change "enabled: no" to "enabled: yes" in /usr/local/etc/pkg/repos/pfSense.conf for FreeBSD repo
-
-- Configure networ interface:
+- Configure re0 network interface:
+```bash
 dhclient re0
-
-- Install packages:
+```
+- Install additional packages:
 pkg install bash
 pw usermod root -s /usr/local/bin/bash
-pw usermod vnx -s /usr/local/bin/bash 
-pkg install perl5 p5-XML-LibXML p5-NetAddr-IP
-
-- Install vnxace:
-mount -t msdosfs /dev/vtbd1 /mnt/
-# edit /mnt/vnxaced-lf/install_vnxaced and comment "if ($res)" block
-perl /mnt/vnxaced-lf/install_vnxaced
-
 - Enable serial console:
 echo "-Dh" > /boot.config
 echo 'boot_multicons="YES"' >> /boot/loader.conf
@@ -54,6 +49,16 @@ reboot
 
 - Stop the vm
 
+
+pw usermod vnx -s /usr/local/bin/bash 
+pkg install perl5 p5-XML-LibXML p5-NetAddr-IP
+
+<!-- Don't install vnxaced as pfSense does not use the standard way of configuring network insterfaces
+- Install vnxace:
+mount -t msdosfs /dev/vtbd1 /mnt/
+# edit /mnt/vnxaced-lf/install_vnxaced and comment "if ($res)" block
+perl /mnt/vnxaced-lf/install_vnxaced
+-->
 
 To create the config.xml pfSense configuration file for a specific scenario:
 
