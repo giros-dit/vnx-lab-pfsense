@@ -11,7 +11,7 @@
 ```bash
 qemu-img create -f qcow2 vnx_rootfs_kvm_pfsense.qcow2 10G
 ```
-- Dowload pfsense ISO installer from pfsense.org/download
+- Dowload pfsense ISO installer from https://pfsense.org/download and uncompress it:
 ```bash
 gunzip pfSense-CE-2.6.0-RELEASE-amd64.iso.gz
 ```
