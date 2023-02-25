@@ -34,17 +34,21 @@ vnx --modify-rootfs vnx_rootfs_kvm_pfsense.qcow2 --mem 4G --arch x86_64 --vcpu 4
 dhclient re0
 ```
 - Install additional packages:
+```bash
 pkg install bash
 pw usermod root -s /usr/local/bin/bash
+```
 - Enable serial console:
+```bash
 echo "-Dh" > /boot.config
 echo 'boot_multicons="YES"' >> /boot/loader.conf
 echo 'boot_serial="YES"' >> /boot/loader.conf
 echo 'console="comconsole,vidconsole"' >> /boot/loader.conf
-
+```
 - Reboot to use serial console:
+```bash
 reboot
-
+```
 - Enable ssh from the pfSense GUI
 
 - Stop the vm
