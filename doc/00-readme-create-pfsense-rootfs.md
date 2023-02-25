@@ -20,11 +20,19 @@ gunzip pfSense-CE-2.6.0-RELEASE-amd64.iso.gz
 virt-install --virt-type kvm --name pfsense --ram 2048 --vcpus 2 --cdrom=/pfSense-CE-2.6.0-RELEASE-amd64.iso --disk vnx_rootfs_kvm_pfsense-2.6.0.qcow2,bus=virtio,size=10,format=qcow2 --network default --network bridge=virbr0 --graphics vnc,listen=0.0.0.0 --noautoconsole --os-type=linux --os-variant=freebsd12.3 &
 virt-viewer pfsense
 ```
+- Open a shell and enable serial console:
+```bash
+echo "-Dh" > /boot.config
+echo 'boot_multicons="YES"' >> /boot/loader.conf
+echo 'boot_serial="YES"' >> /boot/loader.conf
+echo 'console="comconsole,vidconsole"' >> /boot/loader.conf
+```
 - Stop the virtual machine and restart it with:
 ```bash
 vnx --modify-rootfs vnx_rootfs_kvm_pfsense.qcow2 --mem 4G --arch x86_64 --vcpu 4 --update-aced 
 ```
-- Exit configuration assistant with ctrl^c and exit to shell.
+- Access the virtual machine usiang *virsh console ...*.
+- Exit configuration assistant with ctrl^c and exit to a shell to continue configuration.
 - Enable access to external repositories:
   1. Make sure "enabled" key is set to "yes" in /etc/pkg/FreeBSD.conf
   2. Change "enabled: no" to "enabled: yes" in /usr/local/etc/pkg/repos/FreeBSD.conf
@@ -37,13 +45,6 @@ dhclient re0
 ```bash
 pkg install bash
 pw usermod root -s /usr/local/bin/bash
-```
-- Enable serial console:
-```bash
-echo "-Dh" > /boot.config
-echo 'boot_multicons="YES"' >> /boot/loader.conf
-echo 'boot_serial="YES"' >> /boot/loader.conf
-echo 'console="comconsole,vidconsole"' >> /boot/loader.conf
 ```
 - Reboot to use serial console:
 ```bash
