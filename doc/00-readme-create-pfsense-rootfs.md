@@ -2,15 +2,18 @@
 
 ## References:
 
-- Dowload pfsense. pfsense.org/download
 - https://kifarunix.com/install-pfsense-firewall-on-kvm/
 - https://www.eve-ng.net/index.php/documentation/howtos/howto-add-pfsense-fw-2-4/
 
 ## Recipe
 
-Create the filesystem disk image:
+- Create the filesystem disk image:
 ```bash
 qemu-img create -f qcow2 vnx_rootfs_kvm_pfsense.qcow2 10G
+```
+- Dowload pfsense ISO installer from pfsense.org/download
+```bash
+gunzip pfSense-CE-2.6.0-RELEASE-amd64.iso.gz
 ```
 
 virt-install --virt-type kvm --name pfsense --ram 2048 --vcpus 2 --cdrom=/almacen/iso/pfSense-CE-2.6.0-RELEASE-amd64.iso --disk vnx_rootfs_kvm_pfsense.qcow2,bus=virtio,size=10,format=qcow2 --network default --network bridge=virbr0 --graphics vnc,listen=0.0.0.0 --noautoconsole --os-type=linux --os-variant=freebsd10.0
