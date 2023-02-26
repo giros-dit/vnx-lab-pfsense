@@ -1,7 +1,7 @@
 # VNX virtual scenario to test pfSense firewall
 ## Scenario topology
 
-![VNX tutorial pfSense scenario](vnx-lab-pfsense/doc/tutorial_pfsense.png)
+![VNX tutorial pfSense scenario](doc/tutorial_pfsense.png)
 
 ## Getting started
 - Download and uncompress the tutorial scenario:
