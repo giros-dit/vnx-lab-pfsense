@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# 
+# Builds storage disk with pfsense config.xml file 
+#
+
+# move to the directory where the script is located
+cd `dirname $0`
+CDIR=$(pwd)
+
+echo "Creating data disk image..."
+dd if=/dev/zero bs=1K of=data.img bs=10M count=1
+mkfs.vfat data.img
+mkdir -p mnt
+mount data.img mnt/
+if [ ! -z "$1" ]; then 
+    cp -v $1 mnt/config.xml
+fi
+umount mnt
