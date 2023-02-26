@@ -79,32 +79,32 @@ mount -t msdosfs /dev/vtbd1 /mnt/
 perl /mnt/vnxaced-lf/install_vnxaced
 -->
 
-To create the config.xml pfSense configuration file for a specific scenario:
-
-- Start the virtual escenario 
-- From the console, use the menus to configure the interfaces
-- Copy the /conf/config.xml file to the host
+## Configure pfSense for the first time 
+To create the first configuration file (config.xml) for pfSense in a virtual scenario:
+- Start the virtual scenario and wait for pfsense menu to appear (takes some time till timeouts occur)
+- From the console, use options 1 and 2 to define interfaces and configure ip adresses
+- Activate SSH in option 14
+- Open a shell (option 8) and copy the /conf/config.xml file to the host
 - Stop the scenario
-- Start the pfSense image with "vnx --modify-rootfs"
-- Copy the config.xml file to /conf
-- Stop the vm
-
-- Start the scenario 
-
-
+- Copy the config.xml file to conf/r2 directory
+- Create the data disk with this configuration:
+```bash
+./make-storage config.xml
+```
 
 
-- See disks in FreeBSD:
 
-geom disk list
 
-vi /etc/fstab
-/dev/da0                data    msdosfs rw      2       2
 
 
 --- OLD
 
 Comandos:
+
+- See disks in FreeBSD:
+```bash
+geom disk list
+```
 
 qemu-img create -f qcow2 pfsense.qcow2 10G
 
