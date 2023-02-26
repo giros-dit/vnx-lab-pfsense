@@ -1,7 +1,11 @@
 # VNX virtual scenario to test pfSense firewall
 
+- Download and uncompress the tutorial scenario:
+wget http://idefix.dit.upm.es/download/vnx/examples/pfsense/tutorial_pfsense-v02.tgz
+sudo vnx --unpack tutorial_pfsense-v02.tgz 
+cd tutorial_pfsense-v02/
 
-- Define the firewall initial configuration:
+- Optionally, change the pfSense firewall initial configuration:
 ```bash
 cd conf/fw
 ./make-cfg-disk config.xml
@@ -15,6 +19,10 @@ sudo vnx -f tutorial_pfsense.xml --create
 - Start web servers in h3 and h4:
 ```bash
 sudo vnx -f tutorial_pfsense.xml -x start-www
+```
+- The default configuration includes a rule to allow access to web servers running in h3 and h4 from h1 and h2. You can test that from h1 or h2 with:
+```bash
+curl 10.1.2.3
 ```
 - Access pfSense fw configuration:
   - Connecting to http://10.1.2.1 from a web browser with credentials *admin/pfsense*
