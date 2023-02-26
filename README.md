@@ -1,6 +1,6 @@
 # VNX virtual scenario to test pfSense firewall
 
-## 
+## Getting started
 - Download and uncompress the tutorial scenario:
 wget http://idefix.dit.upm.es/download/vnx/examples/pfsense/tutorial_pfsense-v02.tgz
 sudo vnx --unpack tutorial_pfsense-v02.tgz 
