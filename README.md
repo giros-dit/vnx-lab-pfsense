@@ -2,10 +2,11 @@
 
 ## Getting started
 - Download and uncompress the tutorial scenario:
+```bash
 wget http://idefix.dit.upm.es/download/vnx/examples/pfsense/tutorial_pfsense-v02.tgz
 sudo vnx --unpack tutorial_pfsense-v02.tgz 
 cd tutorial_pfsense-v02/
-
+```
 - Optionally, change the pfSense firewall initial configuration:
 ```bash
 cd conf/fw
