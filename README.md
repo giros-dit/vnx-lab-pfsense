@@ -11,8 +11,9 @@ cd ../..
 ```bash
 sudo vnx -f tutorial_pfsense.xml --create
 ```
-- Wait for the fw to complete startup (a *Bootup complete* message should be shown in the fw console #1) and connect to http://10.1.2.1 from a web browser with credentials *admin/pfsense*
-
-
+- Wait for the fw to complete startup (a *Bootup complete* message should be shown in the fw console #1).
+- Start web servers in h3 and h4:
 ```bash
+sudo vnx -f tutorial_pfsense.xml -x start-www
 ```
+- Connect to http://10.1.2.1 from a web browser with credentials *admin/pfsense*
