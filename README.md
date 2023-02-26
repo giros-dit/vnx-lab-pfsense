@@ -32,3 +32,20 @@ sudo vnx -f tutorial_pfsense.xml --create -M fw
 - Go to *Firewall|Aliases* and create an alias named *web_servers* including h3 (10.1.2.3) and h4 (10.1.2.4).
 - Go to *Firewall|Rules|WAN* and create a rule with destination *web_servers* port HTTP(80) to allow access to web servers from Net0 y Net1.
 - Go to *Firewall|Rules|LAN* and create a rule with destination *10.1.2.1* port HTTP(80) to allow access to management from Net2.
+
+## Changing fw startup configuration
+The initial configuration loaded by pfSense firewall is provided to the fw virtual machine through a virtual disk whose image is stored in *conf/fw* directory. To change the configuration, you have to create or modify a existing configuration file and copy it to the disk image.
+There is a simple script in *conf/fw* directory to do that. If you execute:
+```bash
+cd conf/fw
+./make-cfg-disk new-config.xml
+```
+the file *new-config.xml* will be copied to the disk image (data.img), changing the name to config.xml.
+The next time the fw will start, it will load that configuration. 
+To modify a configuration the easiest way consist on:
+- Starting the scenario and modifiying the configuration though the web interface
+- Once modified, accessing fw by SSH, choosing option 8 and executing the following command to copy the configuration to the host:
+```bash
+scp /conf/config.xml user@10.1.2.10:     # change user to your username
+```
+
