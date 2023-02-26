@@ -24,3 +24,9 @@ sudo vnx -f tutorial_pfsense.xml -x start-www
 sudo vnx -f tutorial_pfsense.xml --destroy -M fw
 sudo vnx -f tutorial_pfsense.xml --create -M fw
 ```
+
+## Basic firewall configuration
+- Go to *Interfaces|WAN* and disable  Reserved networks options (block private and block bogon).
+- Go to *Firewall|Aliases* and create an alias named *web_servers* including h3 (10.1.2.3) and h4 (10.1.2.4)
+- Go to *Firewall|Rules|WAN* and create a rule with destination *web_servers* port HTTP(80)
+- Go to *Firewall|Rules|LAN* and create a rule with destination *10.1.2.3* port HTTP(80)
