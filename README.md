@@ -17,3 +17,10 @@ sudo vnx -f tutorial_pfsense.xml --create
 sudo vnx -f tutorial_pfsense.xml -x start-www
 ```
 - Access pfSense fw config page by connecting to http://10.1.2.1 from a web browser with credentials *admin/pfsense*
+
+## Restart firewall
+
+```bash
+sudo vnx -f tutorial_pfsense.xml --destroy -M fw
+sudo vnx -f tutorial_pfsense.xml --create -M fw
+```
