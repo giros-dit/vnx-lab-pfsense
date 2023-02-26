@@ -50,15 +50,28 @@ pw usermod root -s /usr/local/bin/bash
 ```bash
 reboot
 ```
-- Enable ssh from the pfSense GUI
-
+- Enable ssh from the pfSense GUI or editing /conf/config.xml file and adding this before the </system> closing tag:
+```bash
+   <ssh>
+       <enable>enabled</enable>
+   </ssh>
+- Prepare the configuration to be loaded from a external disk:
+```bash 
+mkdir /data
+cd /conf
+mv config.xml /data/
+ln -s /data/config.xml .
+echo "/dev/da0                /data   msdosfs rw      2       2" >> /etc/fstab
+```
 - Stop the vm
+```bash
+halt -p
+```
 
-
+<!-- Don't install vnxaced as pfSense does not use the standard way of configuring network insterfaces
 pw usermod vnx -s /usr/local/bin/bash 
 pkg install perl5 p5-XML-LibXML p5-NetAddr-IP
 
-<!-- Don't install vnxaced as pfSense does not use the standard way of configuring network insterfaces
 - Install vnxace:
 mount -t msdosfs /dev/vtbd1 /mnt/
 # edit /mnt/vnxaced-lf/install_vnxaced and comment "if ($res)" block
