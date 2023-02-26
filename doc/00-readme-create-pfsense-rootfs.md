@@ -55,6 +55,7 @@ reboot
    <ssh>
        <enable>enabled</enable>
    </ssh>
+```
 - Prepare the configuration to be loaded from a external disk:
 ```bash 
 mkdir /data
