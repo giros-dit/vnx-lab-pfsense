@@ -1,5 +1,6 @@
 # VNX virtual scenario to test pfSense firewall
 
+## 
 - Download and uncompress the tutorial scenario:
 wget http://idefix.dit.upm.es/download/vnx/examples/pfsense/tutorial_pfsense-v02.tgz
 sudo vnx --unpack tutorial_pfsense-v02.tgz 
@@ -28,14 +29,8 @@ curl 10.1.2.3
   - Connecting to http://10.1.2.1 from a web browser with credentials *admin/pfsense*
   - Connecting by SSH from the host to admin@10.1.2.1 with password *pfsense*
 
-## Restart firewall
-
-```bash
-sudo vnx -f tutorial_pfsense.xml --destroy -M fw
-sudo vnx -f tutorial_pfsense.xml --create -M fw
-```
-
 ## Basic firewall configuration
+The basic firewall configuration provided has been created in the flllowing way:
 - Go to *Interfaces|WAN* and disable  Reserved networks options (block private and block bogon).
 - Go to *Firewall|Aliases* and create an alias named *web_servers* including h3 (10.1.2.3) and h4 (10.1.2.4).
 - Go to *Firewall|Rules|WAN* and create a rule with destination *web_servers* port HTTP(80) to allow access to web servers from Net0 y Net1.
@@ -49,7 +44,11 @@ cd conf/fw
 ./make-cfg-disk new-config.xml
 ```
 the file *new-config.xml* will be copied to the disk image (data.img), changing the name to config.xml.
-The next time the fw will start, it will load that configuration. 
+The next time the fw will start, it will load that configuration. You can restart the firewall with:
+```bash
+sudo vnx -f tutorial_pfsense.xml --destroy -M fw
+sudo vnx -f tutorial_pfsense.xml --create -M fw
+```
 To modify a configuration the easiest way consist on:
 - Starting the scenario and modifiying the configuration though the web interface
 - Once modified, accessing fw by SSH, choosing option 8 and executing the following command to copy the configuration to the host:
