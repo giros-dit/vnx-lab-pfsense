@@ -50,12 +50,6 @@ pw usermod root -s /usr/local/bin/bash
 ```bash
 reboot
 ```
-- Enable ssh from the pfSense GUI or editing /conf/config.xml file and adding this before the </system> closing tag:
-```bash
-   <ssh>
-       <enable>enabled</enable>
-   </ssh>
-```
 - Prepare the configuration to be loaded from a external disk:
 ```bash 
 mkdir /data
