@@ -90,7 +90,7 @@ To create the first configuration file (config.xml) for pfSense in a virtual sce
 
 
 
-
+<!--
 --- OLD
 
 Comandos:
@@ -108,16 +108,10 @@ virt-install --debug --name=Firewall --memory=4096 --vcpus=2 --location=/almacen
 
 virt-install --virt-type kvm --name pfsense --ram 2048 --vcpus 2 --cdrom=pfSense-CE-2.6.0-RELEASE-amd64.iso --disk pfsense.qcow2,bus=virtio,size=10,format=qcow2 --network default --network bridge=virbr0 --noautoconsole --os-type=linux --os-variant=freebsd10.0 --nographics --extra-args='console=tty0 console=ttyS0,115200n8 serial'
 
-
-
-
-
-
-
 1. Make sure "enabled" key is set to "yes" in /etc/pkg/FreeBSD.conf
 2. Change "enabled: no" to "enabled: yes" in /usr/local/etc/pkg/repos/FreeBSD.conf
 3. Change "enabled: no" to "enabled: yes" in /usr/local/etc/pkg/repos/pfSense.conf for FreeBSD repo
 4. Now you're able to install packages from FreeBSD official repo
 
 
-
+-->
