@@ -13,7 +13,7 @@ cd tutorial_pfsense-v02/
 - Optionally, change the pfSense firewall initial configuration:
 ```bash
 cd conf/fw
-./make-cfg-disk config.xml
+sudo ./make-cfg-disk config.xml
 cd ../..
 ```
 - Start the scenario with:
